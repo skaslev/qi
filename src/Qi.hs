@@ -1,3 +1,4 @@
+-- Quantum statics
 {-# LANGUAGE GADTs #-}
 import Data.Complex
 import Data.List
@@ -8,11 +9,11 @@ type C = Complex Float
 (#) :: [a] -> N -> a
 a # b = genericIndex a b
 
-euclid :: [N] -> [N]
-euclid (x:xs) = x : euclid [y | y <- xs, y `mod` x /= 0]
+sieve :: [N] -> [N]
+sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
 
 prime :: [N]
-prime = euclid [2..]
+prime = sieve [2..]
 
 data Q a b
   where Qa :: a -> b -> Q a b
@@ -37,6 +38,5 @@ one = One 1 (1 :+ 0)
 
 quant :: [N]
 quant = 0 : 1 : prime
-
 
 -- Slavomir Kaslev, 07/22/13
