@@ -1,4 +1,3 @@
--- Slavomir Kaslev, 07/22/13
 {-# LANGUAGE GADTs #-}
 import Data.Complex
 import Data.List
@@ -38,3 +37,6 @@ one = One 1 (1 :+ 0)
 
 quant :: [N]
 quant = 0 : 1 : prime
+
+
+-- Slavomir Kaslev, 07/22/13
