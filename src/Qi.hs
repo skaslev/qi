@@ -8,11 +8,11 @@ type C = Complex Float
 (#) :: [a] -> N -> a
 a # b = genericIndex a b
 
-sieve :: [N] -> [N]
-sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
+euclid :: [N] -> [N]
+euclid (x:xs) = x : euclid [y | y <- xs, y `mod` x /= 0]
 
 prime :: [N]
-prime = sieve [2..]
+prime = euclid [2..]
 
 data Q a b
   where Qa :: a -> b -> Q a b
