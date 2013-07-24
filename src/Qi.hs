@@ -20,38 +20,33 @@ primes :: [N]
 primes = sieve [2..]
 
 data Qi a b
-  where Qi :: a -> b -> Qi a b
+  where Qi :: N -> a -> b -> Qi a b
   deriving Show
+
+vacuum :: Qi N C
+vacuum = Qi 0 0 (0 :+ 0)
+
+one :: Qi N C
+one = Qi 1 1 (1 :+ 0)
+
+qprimes :: [Qi N C]
+qprimes = [Qi i p (1 :+ 0) | (i,p) <- zip [2..] primes]
 
 qi :: [Qi N C]
-qi = [Qi (primes !! i) (1 :+ 0) | i <- [0..]]
-
-data Vacuum a b
-  where Vacuum :: a -> b -> Vacuum a b
-  deriving Show
-
-vacuum :: Vacuum N C
-vacuum = Vacuum 0 (0 :+ 0)
-
-data One a b
-  where One :: a -> b -> One a b
-  deriving Show
-
-one :: One N C
-one = One 1 (1 :+ 0)
+qi = vacuum : one : qprimes
 
 data MSet a
   --deriving (Eq, Ord, Show)
 
 data Spectrum a b
   where
-    Black :: Vacuum a b -> Spectrum a b
-    Factors :: One a b -> MSet [Qi a b] -> Spectrum a b
+    Black :: Spectrum a b
+    Factors :: MSet (Qi a b) -> Spectrum a b
   --deriving (Eq, Ord, Show)
 
 spectrum :: [Spectrum N C]
 spectrum = undefined
---spectrum = Black vacuum : (Factors one []) : (Factors one qi)
+--spectrum = Black : (Factors one []) : (Factors one qi)
 -- TODO: needs normalization to |one|
 
 d :: Num a => [a] -> [a]
