@@ -1,13 +1,14 @@
 -- Quantum statics
 {-# LANGUAGE GADTs #-}
 import Data.Complex
-import Data.List
+import Data.List hiding ((!!), replicate)
+import Prelude hiding ((!!), replicate)
+
+(!!) = genericIndex
+replicate = genericReplicate
 
 type N = Integer
 type C = Complex Float
-
-(#) :: [a] -> N -> a
-a # b = genericIndex a b
 
 sieve :: [N] -> [N]
 sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
@@ -16,11 +17,11 @@ prime :: [N]
 prime = sieve [2..]
 
 data Q a b
-  where Qa :: a -> b -> Q a b
+  where Qi :: a -> b -> Q a b
   deriving Show
 
 q :: N -> Q N C
-q n = Qa (prime # n) (1 :+ 0)
+q i = Qi (prime !! i) (1 :+ 0)
 
 data Vacuum a b
   where Vacuum :: a -> b -> Vacuum a b
@@ -53,17 +54,31 @@ data Nat a b
     -- Vacuum -> Nat
     -- One -> VectorSpace Q -> Nat
 
-type Cantor = N -> Bool
-type Pred = Cantor -> Bool
-type Dist = N -> N
+factor :: N -> [N]
+factor 0 = []
+factor 1 = []
+factor n =
+  (\(p:ps) ->
+    let k = dlog p n
+    in (replicate k p) ++ (factor (n `div` (p^k)))) $
+  dropWhile (\p -> n `mod` p /= 0) $
+  takeWhile (<= n) $
+  prime
 
---is_factor :: Dist -> N -> Bool
---is_factor f n = n `div` f n == 0
---
+-- p <- prime
+dlog :: N -> N -> N
+dlog p n | r /= 0 = 0
+         | otherwise = 1 + dlog p q
+  where
+    (q,r) = divMod n p
+
 --factor :: N -> Cantor
 --factor = epsilon is_factor
 --factor :: N -> Dist  -- N -> [N]
 --factor = [f i | i <-
+
+type Cantor = N -> Bool
+type Pred = Cantor -> Bool
 
 epsilon :: Pred -> Cantor
 epsilon p = branch x l r
