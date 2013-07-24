@@ -23,8 +23,8 @@ data Qi a b
   where Qi :: a -> b -> Qi a b
   deriving Show
 
-qi :: N -> Qi N C
-qi i = Qi (primes !! i) (1 :+ 0)
+qi :: [Qi N C]
+qi = [Qi (primes !! i) (1 :+ 0) | i <- [0..]]
 
 data Vacuum a b
   where Vacuum :: a -> b -> Vacuum a b
@@ -40,22 +40,23 @@ data One a b
 one :: One N C
 one = One 1 (1 :+ 0)
 
--- spectrum
-quanta :: [N]
-quanta = 0 : 1 : primes
+data MSet a
+  --deriving (Eq, Ord, Show)
+
+data Spectrum a b
+  where
+    Black :: Vacuum a b -> Spectrum a b
+    Factors :: One a b -> MSet [Qi a b] -> Spectrum a b
+  --deriving (Eq, Ord, Show)
+
+spectrum :: [Spectrum N C]
+spectrum = undefined
+--spectrum = Black vacuum : (Factors one []) : (Factors one qi)
+-- TODO: needs normalization to |one|
 
 d :: Num a => [a] -> [a]
 d (x:y:xs) = (y-x) : d (y:xs)
 d _ = []
-
-
--- Natural numbers
--- Vacuum -> Nat
--- One -> VectorSpace (Qi a) -> Nat
-data Nat a b
-  where
-    Zero :: Vacuum a b -> Nat a b
-    Factors :: One a b -> [Qi a b] -> Nat a b
 
 factor :: N -> [N]
 factor 0 = []
