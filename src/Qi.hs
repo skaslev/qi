@@ -1,4 +1,6 @@
--- Quantum statics
+-- Quantum statics // Primus quantum valeō
+-- Author: Slavomir Kaslev <slavomir.kaslev@gmail.com>, 2013
+
 {-# LANGUAGE GADTs #-}
 import Data.Complex
 import Data.List hiding ((!!), replicate)
@@ -38,8 +40,8 @@ data One a b
 one :: One N C
 one = One 1 (1 :+ 0)
 
-quants :: [N]
-quants = 0 : 1 : primes
+quanta :: [N]
+quanta = 0 : 1 : primes
 
 d :: Num a => [a] -> [a]
 d (x:y:xs) = (y-x) : d (y:xs)
@@ -47,13 +49,12 @@ d _ = []
 
 
 -- Natural numbers
+-- Vacuum -> Nat
+-- One -> VectorSpace Q -> Nat
 data Nat a b
   where
     Zero :: Vacuum a b -> Nat a b
     Factors :: One a b -> [Q a b] -> Nat a b
-    --
-    -- Vacuum -> Nat
-    -- One -> VectorSpace Q -> Nat
 
 factor :: N -> [N]
 factor 0 = []
@@ -65,27 +66,8 @@ factor n = replicate k p ++ factor (n `div` (p^k))
         takeWhile (<= n) $
         primes
     k = dlog p n
-    dlog p n | r /= 0 = 0
-             | otherwise = 1 + dlog p q
-      where
-        (q,r) = divMod n p
 
---factor :: N -> Cantor
---factor = epsilon is_factor
-
-type Cantor = N -> Bool
-type Pred = Cantor -> Bool
-
-epsilon :: Pred -> Cantor
-epsilon p = branch x l r
- where
-  branch x l r n
-    | n == 0 = x
-    | odd n = l ((n-1) `div` 2)
-    | otherwise = r ((n-2) `div` 2)
-  x = exists (\l -> (exists (\r -> p (branch True l r))))
-  l = epsilon (\l -> (exists (\r -> p (branch x l r))))
-  r = epsilon (\r -> p (branch x l r))
-
-exists :: Pred -> Bool
-exists p = p (epsilon p)
+dlog :: N -> N -> N
+dlog b n | r /= 0 = 0
+         | otherwise = 1 + dlog b q
+  where (q,r) = n `divMod` b
