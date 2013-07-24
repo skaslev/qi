@@ -19,12 +19,12 @@ sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
 primes :: [N]
 primes = sieve [2..]
 
-data Q a b
-  where Qi :: a -> b -> Q a b
+data A a b
+  where A :: a -> b -> A a b
   deriving Show
 
-q :: N -> Q N C
-q i = Qi (primes !! i) (1 :+ 0)
+a :: N -> A N C
+a i = A (primes !! i) (1 :+ 0)
 
 data Vacuum a b
   where Vacuum :: a -> b -> Vacuum a b
@@ -40,6 +40,7 @@ data One a b
 one :: One N C
 one = One 1 (1 :+ 0)
 
+-- spectrum
 quanta :: [N]
 quanta = 0 : 1 : primes
 
@@ -50,11 +51,11 @@ d _ = []
 
 -- Natural numbers
 -- Vacuum -> Nat
--- One -> VectorSpace Q -> Nat
+-- One -> VectorSpace (A a) -> Nat
 data Nat a b
   where
     Zero :: Vacuum a b -> Nat a b
-    Factors :: One a b -> [Q a b] -> Nat a b
+    Factors :: One a b -> [A a b] -> Nat a b
 
 factor :: N -> [N]
 factor 0 = []
