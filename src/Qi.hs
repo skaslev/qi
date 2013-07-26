@@ -4,7 +4,10 @@
 {-# LANGUAGE GADTs #-}
 import Data.Complex
 import Data.List hiding ((!!), replicate)
-import Data.List.Utils
+import Data.List.Utils (uniq)
+import qualified Data.MultiSet as MS
+import Data.Number.Nat (Nat(..))
+import Data.Number.Nat1 (toNat1)
 import Prelude hiding ((!!), replicate)
 
 (!!) = genericIndex
@@ -19,32 +22,42 @@ sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
 primes :: [N]
 primes = sieve [2..]
 
-data Qi a b
-  where Qi :: N -> a -> b -> Qi a b
+data Prime
+  where Prime :: Nat -> Prime
   deriving Show
 
-vacuum :: Qi N C
-vacuum = Qi 0 0 (0 :+ 0)
+prs :: [Prime]
+prs = [Prime (Pos (toNat1 p)) | p <- primes]
 
-one :: Qi N C
-one = Qi 1 1 (1 :+ 0)
+data Qi a
+  where Qi :: Nat -> Prime -> a -> Qi a
+  deriving Show
 
-qprimes :: [Qi N C]
-qprimes = [Qi i p (1 :+ 0) | (i,p) <- zip [2..] primes]
+instance Eq (Qi a) where
+  (Qi i _ _) == (Qi j _ _) = i == j
 
-qi :: [Qi N C]
+instance Ord (Qi a) where
+  compare (Qi i _ _)  (Qi j _ _) = compare i j
+
+vacuum :: Qi C
+vacuum = Qi Zero undefined (0 :+ 0)
+
+one :: Qi C
+one = Qi (Pos 1) undefined (1 :+ 0)
+
+qprimes :: [Qi C]
+qprimes = [Qi (Pos $ toNat1 i) p (1 :+ 0) | (i, p) <- zip [2..] prs]
+
+qi :: [Qi C]
 qi = vacuum : one : qprimes
 
-data MSet a
-  --deriving (Eq, Ord, Show)
-
-data Spectrum a b
+data Spectrum a
   where
-    Black :: Spectrum a b
-    Factors :: MSet (Qi a b) -> Spectrum a b
-  --deriving (Eq, Ord, Show)
+    Black :: Spectrum a
+    Factors :: MS.MultiSet (Qi a) -> Spectrum a
+  deriving (Eq, Ord, Show)
 
-spectrum :: [Spectrum N C]
+spectrum :: [Spectrum C]
 spectrum = undefined
 --spectrum = Black : (Factors one []) : (Factors one qi)
 -- TODO: needs normalization to |one|
