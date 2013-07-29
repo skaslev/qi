@@ -8,11 +8,11 @@
   text-align: center;
 }
 </style>
-<title>Linear operators and data types</title>
+<title>Linear Operators and Algerbraic Data Types</title>
 </head>
 
 <body>
-<h1>Linear operators and data types</h1>
+<h1>Linear Operators and Algerbraic Data Types</h1>
 
 
 <section>
@@ -26,7 +26,23 @@
 
 
 <section>
-<h2>List ADT</h2>
+<h2>Unit</h2>
+<pre class="prettyprint hs">
+data I a = I a
+</pre>
+\[ I(a) = a \]
+\[ I(a) - a = 0 \]
+\[ [a^0] I(a) = 1 \]
+\[ [a^{N+1}] I(a) = 0 \]
+<hr>
+\[ \lambda - a = 0 \]
+\[ \lambda = a \]
+\[ a = \lambda \]
+</section>
+
+
+<section>
+<h2>List</h2>
 <pre class="prettyprint hs">
 data [a] = [] | a:[a]
 </pre>
@@ -37,6 +53,7 @@ data List a = Nil | Cons a (List a)
 \[ (a - 1) L(a) + 1 = 0 \]
 \[ L(a) = \frac{1}{1 - a} \]
 \[ [a^N] L(a) = 1 \]
+<hr>
 \[ (a - 1) \lambda + 1 = 0 \]
 \[ \lambda = \frac{1}{1 - a} \]
 \[ a = \frac{\lambda - 1}{\lambda} \]
@@ -44,7 +61,7 @@ data List a = Nil | Cons a (List a)
 
 
 <section>
-<h2>Tree ADT</h2>
+<h2>Tree</h2>
 <pre class="prettyprint hs">
 data Tree a = Node a [Tree a]
 type Forrest a = [Tree a]
@@ -56,13 +73,14 @@ data Tree a = Node a (List (Tree a))
 \[ T(a) = \frac{a}{1 - T(a)} \]
 \[ T(a)^2 - T(a) + a = 0 \]
 \[ T(a) = a + T(a)^2 \]
+<hr>
 \[ \lambda^2 - \lambda + a = 0 \]
 \[ a = \lambda (1 - \lambda) \]
 </section>
 
 
 <section>
-<h2>Binary Tree ADT (external)</h2>
+<h2>Binary Tree (external)</h2>
 <pre class="prettyprint">
 data BinTree a = Leaf a | Branch (BinTree a) (BinTree a)
 </pre>
@@ -71,7 +89,7 @@ data BinTree a = Leaf a | Branch (BinTree a) (BinTree a)
 </section>
 
 <section>
-<h2>Full Binary Tree ADT</h2>
+<h2>Full Binary Tree</h2>
 <pre class="prettyprint">
 data BinTree a = Leaf a | Branch a (BinTree a) (BinTree a)
 </pre>
@@ -80,20 +98,21 @@ data BinTree a = Leaf a | Branch a (BinTree a) (BinTree a)
 </section>
 
 <section>
-<h2>Internal Binary Tree ADT</h2>
+<h2>Internal Binary Tree</h2>
 <pre class="prettyprint">
 data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
 </pre>
 \[ B(a) = 1 + a B(a)^2 \]
 \[ a B(a)^2 - B(a) + 1 = 0 \]
 \[ [a^N] B(a) = \frac{1}{N+1} \binom{2 N}{N} \sim \frac{4^N}{\sqrt{\pi N^3}} \]
+<hr>
 \[ a \lambda^2 - \lambda + 1 = 0 \]
+\[ a = \frac{\lambda - 1}{\lambda^2} \]
 \[ \lambda_{\pm} = \left\{
   \begin{array}{l l}
     1 & \quad \text{if $a = 0$}\\
     \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0 $}
   \end{array} \right.\]
-\[ a = \frac{\lambda - 1}{\lambda^2} \]
 </section>
 
 
