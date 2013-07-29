@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 <meta charset='utf-8'>
 <style>
@@ -9,19 +10,16 @@
 </style>
 <title>Linear operators and data types</title>
 </head>
+
 <body>
 <h1>Linear operators and data types</h1>
 
 
 <section>
-<h2>Linear Algebra</h2>
-
+<h2>Linear Operators</h2>
 \[ H \]
-
 \[ H(\alpha u + \beta v) = \alpha H u + \beta H v  \]
-
 \[ \det (H - \lambda I) = 0 \]
-
 \[ H v = \lambda v \]
 </section>
 
@@ -37,6 +35,7 @@ data List a = Nil | Cons a (List a)
 \[ L(a) = 1 + a L(a) \]
 </section>
 
+
 <h2>Tree ADT</h2>
 <pre class="prettyprint center">
 data Tree a = Node a (List (Tree a))
@@ -47,6 +46,7 @@ data Tree a = Node a (List (Tree a))
 \[ T(a) = a + T(a)^2 \]
 </section>
 
+
 <section>
 <h2>Binary Tree ADT</h2>
 <pre class="prettyprint center">
@@ -56,15 +56,19 @@ data BinTree a = Leaf a | Branch (BinTree a) (BinTree a)
 \[ B(a)^2 - B(a) + a = 0 \]
 \[ B(a) = a + B(a)^2 \]
 </section>
+
+
 <section>
-
-</section>
-
+<h2>Primes</h2>
 <pre class="prettyprint">
 primes = sieve [2..]
 sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x /= 0]
 </pre>
+</section>
+
+
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=hs"></script>
 </body>
+
 </html>
