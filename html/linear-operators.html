@@ -32,8 +32,11 @@ data I a = I a
 </pre>
 \[ I(a) = a \]
 \[ I(a) - a = 0 \]
-\[ [a^0] I(a) = 1 \]
-\[ [a^{N+1}] I(a) = 0 \]
+\[ [a^N] I(a) = \left\{
+  \begin{array}{l l}
+    1 & \quad \text{if $N = 0$}\\
+    0 & \quad \text{if $N \neq 0$}
+  \end{array} \right.\]
 <hr>
 \[ \lambda - a = 0 \]
 \[ \lambda = a \]
@@ -97,6 +100,7 @@ data BinTree a = Leaf a | Branch a (BinTree a) (BinTree a)
 \[ a B(a)^2 - B(a) + a = 0 \]
 </section>
 
+
 <section>
 <h2>Internal Binary Tree</h2>
 <pre class="prettyprint">
@@ -111,7 +115,7 @@ data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
 \[ \lambda_{\pm} = \left\{
   \begin{array}{l l}
     1 & \quad \text{if $a = 0$}\\
-    \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0 $}
+    \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0$}
   \end{array} \right.\]
 </section>
 
