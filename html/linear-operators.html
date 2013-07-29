@@ -17,10 +17,10 @@
 
 <section>
 <h2>Linear Operators</h2>
-\[ H : \prod_{u,v \in \mathbb{R^n}} \prod_{\alpha,\beta \in \mathbb{R}} H(\alpha u + \beta v) = \alpha H u + \beta H v \]
-\[ H(\alpha u + \beta v) = \alpha H u + \beta H v  \]
-\[ \det (H - \lambda I) = 0 \]
-\[ H v = \lambda v \]
+\[ H : \prod_{a,b \in \mathbb{R^n}} \prod_{\alpha,\beta \in \mathbb{R}} H(\alpha a + \beta b) = \alpha H a + \beta H b \]
+\[ H(\alpha a + \beta b) = \alpha H a + \beta H b  \]
+\[ \| H - \lambda I \| = 0 \]
+\[ H v_n = \lambda v_n \]
 </section>
 
 
@@ -33,6 +33,7 @@ data List a = Nil | Cons a (List a)
 \[ L(a) = \frac{1}{1 - a} \]
 \[ L(a) - a L(a) - 1 = 0 \]
 \[ L(a) = 1 + a L(a) \]
+\[ [a^N] L(a) = 1 \]
 </section>
 
 
@@ -56,6 +57,27 @@ data BinTree a = Leaf a | Branch (BinTree a) (BinTree a)
 \[ B(a) = a + B(a) B(a) \]
 \[ B(a)^2 - B(a) + a = 0 \]
 \[ B(a) = a + B(a)^2 \]
+</section>
+
+<section>
+<h2>Full Binary Tree ADT</h2>
+<pre class="prettyprint center">
+data BinTree a = Leaf a | Branch a (BinTree a) (BinTree a)
+</pre>
+\[ B(a) = a + a B(a) B(a) \]
+\[ a B(a)^2 - B(a) + a = 0 \]
+\[ B(a) = a + a B(a)^2 \]
+</section>
+
+<section>
+<h2>Internal Binary Tree ADT</h2>
+<pre class="prettyprint center">
+data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
+</pre>
+\[ B(a) = 1 + a B(a) B(a) \]
+\[ a B(a)^2 - B(a) + a = 0 \]
+\[ B(a) = 1 + a B(a)^2 \]
+\[ [a^N] B(a) = \frac{1}{N+1} \binom{2 N}{N} \sim \frac{4^N}{\sqrt{\pi N^3}} \]
 </section>
 
 
