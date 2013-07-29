@@ -26,20 +26,26 @@
 
 <section>
 <h2>List ADT</h2>
-<pre class="prettyprint center">
+<pre class="prettyprint hs">
+data [a] = [] | a:[a]
+</pre>
+<pre class="prettyprint adt">
 data List a = Nil | Cons a (List a)
 </pre>
 \[ L(a) = 1 + a L(a) \]
 \[ L(a) = \frac{1}{1 - a} \]
 \[ L(a) - a L(a) - 1 = 0 \]
-\[ L(a) = 1 + a L(a) \]
 \[ [a^N] L(a) = 1 \]
 </section>
 
 
 <section>
 <h2>Tree ADT</h2>
-<pre class="prettyprint center">
+<pre class="prettyprint hs">
+type Forrest a = [Tree a]
+data Tree a = Node a [Tree a]
+</pre>
+<pre class="prettyprint adt">
 data Tree a = Node a (List (Tree a))
 </pre>
 \[ T(a) = a L(T(a)) \]
@@ -50,34 +56,37 @@ data Tree a = Node a (List (Tree a))
 
 
 <section>
-<h2>Binary Tree ADT</h2>
-<pre class="prettyprint center">
+<h2>Binary Tree ADT (external)</h2>
+<pre class="prettyprint">
 data BinTree a = Leaf a | Branch (BinTree a) (BinTree a)
 </pre>
-\[ B(a) = a + B(a) B(a) \]
-\[ B(a)^2 - B(a) + a = 0 \]
 \[ B(a) = a + B(a)^2 \]
+\[ B(a)^2 - B(a) + a = 0 \]
 </section>
 
 <section>
 <h2>Full Binary Tree ADT</h2>
-<pre class="prettyprint center">
+<pre class="prettyprint">
 data BinTree a = Leaf a | Branch a (BinTree a) (BinTree a)
 </pre>
-\[ B(a) = a + a B(a) B(a) \]
-\[ a B(a)^2 - B(a) + a = 0 \]
 \[ B(a) = a + a B(a)^2 \]
+\[ a B(a)^2 - B(a) + a = 0 \]
 </section>
 
 <section>
 <h2>Internal Binary Tree ADT</h2>
-<pre class="prettyprint center">
+<pre class="prettyprint">
 data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
 </pre>
-\[ B(a) = 1 + a B(a) B(a) \]
-\[ a B(a)^2 - B(a) + a = 0 \]
 \[ B(a) = 1 + a B(a)^2 \]
+\[ a B(a)^2 - B(a) + 1 = 0 \]
 \[ [a^N] B(a) = \frac{1}{N+1} \binom{2 N}{N} \sim \frac{4^N}{\sqrt{\pi N^3}} \]
+\[ a \lambda^2 - \lambda + 1 = 0 \]
+\[ \lambda_{\pm} = \left\{
+  \begin{array}{l l}
+    1 & \quad \text{if $a = 0$}\\
+    \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0 $}
+  \end{array} \right.\]
 </section>
 
 
