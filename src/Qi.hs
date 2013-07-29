@@ -23,14 +23,23 @@ primes :: [N]
 primes = sieve [2..]
 
 data Prime
-  where Prime :: Nat -> Prime
-  deriving Show
+  where Prime :: N -> Prime
+  deriving (Eq, Show)
+
+--data List a = Nil | Const a (List a)
+--	Nil +  a Nil + a a Nil + a
 
 prs :: [Prime]
-prs = [Prime (Pos (toNat1 p)) | p <- primes]
+prs = [Prime p | p <- primes]
+
+data Ln a where
+  Ln :: a -> Ln a
+
+lnp :: Prime -> N
+lnp (Prime n) = n
 
 data Qi a
-  where Qi :: Nat -> Prime -> a -> Qi a
+  where Qi :: N -> Prime -> a -> Qi a
   deriving Show
 
 instance Eq (Qi a) where
@@ -40,13 +49,13 @@ instance Ord (Qi a) where
   compare (Qi i _ _)  (Qi j _ _) = compare i j
 
 vacuum :: Qi C
-vacuum = Qi Zero undefined (0 :+ 0)
+vacuum = Qi 0 undefined (0 :+ 0)
 
 one :: Qi C
-one = Qi (Pos 1) undefined (1 :+ 0)
+one = Qi 1 undefined (1 :+ 0)
 
 qprimes :: [Qi C]
-qprimes = [Qi (Pos $ toNat1 i) p (1 :+ 0) | (i, p) <- zip [2..] prs]
+qprimes = [Qi i p (1 :+ 0) | (i, p) <- zip [2..] prs]
 
 qi :: [Qi C]
 qi = vacuum : one : qprimes
