@@ -17,7 +17,8 @@
 
 <section>
 <h2>Linear Operators</h2>
-\[ H : \prod_{a,b \in \mathbb{R^n}} \prod_{\alpha,\beta \in \mathbb{R}} H(\alpha a + \beta b) = \alpha H a + \beta H b \]
+\[ H :  \mathbb{R^n} \to \mathbb{R^n} \]
+\[ \prod_{a,b \in \mathbb{R^n}} \prod_{\alpha,\beta \in \mathbb{R}} H(\alpha a + \beta b) = \alpha H a + \beta H b \]
 \[ H(\alpha a + \beta b) = \alpha H a + \beta H b  \]
 \[ \| H - \lambda I \| = 0 \]
 \[ H v_n = \lambda_n v_n \]
@@ -33,17 +34,20 @@ data [a] = [] | a:[a]
 data List a = Nil | Cons a (List a)
 </pre>
 \[ L(a) = 1 + a L(a) \]
+\[ a L(a) - L(a) + 1 = 0 \]
 \[ L(a) = \frac{1}{1 - a} \]
-\[ L(a) - a L(a) - 1 = 0 \]
 \[ [a^N] L(a) = 1 \]
+\[ (a - 1) \lambda + 1 = 0 \]
+\[ \lambda = \frac{1}{1 - a} \]
+\[ a = \frac{\lambda - 1}{\lambda} \]
 </section>
 
 
 <section>
 <h2>Tree ADT</h2>
 <pre class="prettyprint hs">
-type Forrest a = [Tree a]
 data Tree a = Node a [Tree a]
+type Forrest a = [Tree a]
 </pre>
 <pre class="prettyprint adt">
 data Tree a = Node a (List (Tree a))
@@ -52,6 +56,8 @@ data Tree a = Node a (List (Tree a))
 \[ T(a) = \frac{a}{1 - T(a)} \]
 \[ T(a)^2 - T(a) + a = 0 \]
 \[ T(a) = a + T(a)^2 \]
+\[ \lambda^2 - \lambda + a = 0 \]
+\[ a = \lambda (1 - \lambda) \]
 </section>
 
 
@@ -87,6 +93,7 @@ data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
     1 & \quad \text{if $a = 0$}\\
     \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0 $}
   \end{array} \right.\]
+\[ a = \frac{\lambda - 1}{\lambda^2} \]
 </section>
 
 
