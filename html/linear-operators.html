@@ -18,10 +18,10 @@
 <section>
 <h2>Linear Operators</h2>
 \[ H :  \mathbb{R^n} \to \mathbb{R^n} \]
-\[ \prod_{a,b \in \mathbb{R^n}} \prod_{\alpha,\beta \in \mathbb{R}} H(\alpha a + \beta b) = \alpha H a + \beta H b \]
-\[ H(\alpha a + \beta b) = \alpha H a + \beta H b  \]
+\[ \prod_{\alpha,\beta \in \mathbb{R}} \prod_{f,g \in \mathbb{R^n}} \lbrace H(\alpha f + \beta g) = \alpha H f + \beta H g \rbrace \]
+\[ H(\alpha f + \beta g) = \alpha H f + \beta H g  \]
 \[ \| H - \lambda I \| = 0 \]
-\[ H v_n = \lambda_n v_n \]
+\[ H f_n = \lambda_n f_n \]
 </section>
 
 
@@ -34,7 +34,7 @@ data [a] = [] | a:[a]
 data List a = Nil | Cons a (List a)
 </pre>
 \[ L(a) = 1 + a L(a) \]
-\[ a L(a) - L(a) + 1 = 0 \]
+\[ (a - 1) L(a) + 1 = 0 \]
 \[ L(a) = \frac{1}{1 - a} \]
 \[ [a^N] L(a) = 1 \]
 \[ (a - 1) \lambda + 1 = 0 \]
