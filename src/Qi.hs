@@ -38,6 +38,21 @@ data Ln a where
 lnp :: Prime -> N
 lnp (Prime n) = n
 
+-- cut :: N -> Prime -> Powers Prime
+cut :: N -> N -> [N]
+cut n p = takeWhile (\pn -> n `mod` pn == 0) (iterate (*p) p)
+-- NOTE n and p are separable
+-- |cut n| * (Powers Prime := iterate (*p) p)
+--
+-- *Main> take 5 $ map (cut (8*9)) primes
+-- [[2,4,8],[3,9],[],[],[]]
+--
+-- Map factorizing tree for every n, e.g.
+-- (1,24) _ (2,12) _ (2,6) _ (2,3) _ (3,1) __ []
+--        |        |       \ (3,2) _ (2,1) __ []
+--        |        \ (3,4) _ (2,2) _ (2,1) __ []
+--        \ (3, 8) _ (2,4) _ (2,2) _ (2,1) __ []
+
 data Qi a
   where Qi :: N -> Prime -> a -> Qi a
   deriving Show

@@ -26,23 +26,6 @@
 
 
 <section>
-<h2>Unit</h2>
-<pre class="prettyprint hs">
-data I a = I a
-</pre>
-\[ I(a) = a \]
-\[ I(a) - a = 0 \]
-\[ [a^N] I(a) = \left\{
-  \begin{array}{l l}
-    1 & \quad \text{if $N = 0$}\\
-    0 & \quad \text{if $N \neq 0$}
-  \end{array} \right.\]
-<hr>
-\[ \lambda - a = 0 \]
-\[ \lambda = a \]
-\[ a = \lambda \]
-</section>
-
 
 <section>
 <h2>List</h2>
@@ -116,6 +99,35 @@ data BinTree a = Leaf | Branch a (BinTree a) (BinTree a)
   \begin{array}{l l}
     1 & \quad \text{if $a = 0$}\\
     \frac{1 \pm \sqrt{1 - 4a}}{2a} & \quad \text{if $a \neq 0$}
+  \end{array} \right.\]
+</section>
+
+
+<section>
+<h2>Lists of Lists</h2>
+<pre class="prettyprint adt">
+data F a = F (List (List a))
+</pre>
+\[ F(a) = L(L(a)) \]
+\[ a F(a) - (a - 1) = 0 \]
+\[ F(a) = \frac{1}{1 - \frac{1}{1 - a}} \]
+\[ F(a) = \frac{a - 1}{a} \]
+\[ a = \frac{1}{1 - F(a)} \]
+\[ [a^N] F(a) = ? \]
+<hr>
+</section>
+
+
+<section>
+<h2>Unit</h2>
+<pre class="prettyprint hs">
+data I a = I a
+</pre>
+\[ I(a) = a \]
+\[ [a^N] I(a) = \left\{
+  \begin{array}{l l}
+    1 & \quad \text{if $N = 1$}\\
+    0 & \quad \text{if $N \neq 1$}
   \end{array} \right.\]
 </section>
 
